@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ParserGoogleController!{% endblock %}
+{% block header %}
+    <header>
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+            <h5 class="my-0 mr-md-auto font-weight-normal">Выборка результатов из Google</h5>
+        </div>
+    </header>
+{% endblock %}
+{% block navbar %}
+    {% for history in app.flashes('nav') %}
+    <div class="container">
+        <nav class="nav nav-underline">
+            <a class="nav-link active" href="/">Главная </a>
+            <a class="nav-link" href="history">{{ history }}</a>
+        </nav>
+    </div>
+    {% endfor %}
+{% endblock %}
+{% block error_notDB %}
+    {% for message in app.flashes('success') %}
+        <div class="container">
+        <div class = "alert alert-danger">
+            <div class="container">
+                <span class="align-middle">{{ message }}</span>
+            </div>
+        </div>
+        </div>
+     {% endfor %}
+{% endblock %}
+{% block error %}
+    {% for field, errorMessage in errorMessages %}
+        <div class="container">
+            <div class = "alert alert-danger">
+                <div class="container">
+                    <div class="row mb-3">
+                        <ul>
+                            <li>{{ field }}: {{ errorMessage }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+{% block form %}
+    <main role="main" class="container">
+        <div class="my-3 p-3 bg-white rounded shadow-sm">
+            <form action ="/key" method="POST" class ="form-horizontal">
+                <div class="container">
+                    <div class="row mb-3">
+                        <div class="col-6 themed-grid-col">
+                            Ключивое слово
+                        </div>
+                        <div class="col-6 themed-grid-col">
+                            Домен
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row mb-3">
+                        <div class="col-6 themed-grid-col">
+                            <input type="text" name="key_word" class="form-control">
+                        </div>
+                        <div class="col-6 themed-grid-col">
+                            <input type="text" name="key_domaine" class="form-control">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Запросить</button>
+                </div>
+            </form>
+        </div>
+    </main>
+{% endblock %}
